@@ -1,6 +1,7 @@
 import random
 import statistics
 import matplotlib.pyplot as plt
+import time
 
 def simulate(sims):
     total_pads = 10
@@ -20,17 +21,23 @@ def simulate(sims):
     return statistics.mean(results)
 
 simulations = 10000
-sim_size = 1000
+sim_size = 10000
 
 counter = 0
 calculated_mean = []
+
+start = time.time()
 
 while counter < simulations:
     calculated_mean.append(simulate(sim_size))
     counter += 1
 
 answer = statistics.mean(calculated_mean)
-print(str(simulations) + " simulations of size " + str(sim_size) + " were run, returning " + str(answer))
+
+end = time.time()
+time_taken = end - start
+
+print(str(simulations) + " simulations of size " + str(sim_size) + " were completed, returning " + str(answer) + ". Runtime was " + str(time_taken) + "s.")
 
 plt.hist(calculated_mean, bins=40, density=True)
 plt.show()
