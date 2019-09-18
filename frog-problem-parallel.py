@@ -2,6 +2,8 @@ import random
 import statistics
 import matplotlib.pyplot as plt
 import time
+from multiprocessing import Pool
+# print("Number of processors: ", mp.cpu_count())
 
 def simulate(sims):
     total_pads = 10
@@ -18,22 +20,27 @@ def simulate(sims):
     
     return statistics.mean(results)
 
-simulations = 1000
-sim_size = 1000
+simulations = 10
+sim_size = 10
 
 calculated_mean = []
 
+pool = Pool(4)
+
 start = time.time()
 
-for i in range(simulations):
-    calculated_mean.append(simulate(sim_size))
-
-answer = statistics.mean(calculated_mean)
+answers = pool.map_async(simulate(sim_size), [i for i in range(simulations)])
 
 end = time.time()
 time_taken = end - start
 
-print(str(simulations) + " simulations of size " + str(sim_size) + " were completed, returning " + str(answer) + ". Runtime was " + str(time_taken) + "s.")
+pool.close()
+# pool.join()
 
-plt.hist(calculated_mean, bins=40, density=True)
-plt.show()
+print(answers)
+print(answers[0])
+
+# print(str(simulations) + " simulations of size " + str(sim_size) + " were completed, returning " + str(answer) + ". Runtime was " + str(time_taken) + "s.")
+
+# plt.hist(calculated_mean, bins=40, density=True)
+# plt.show()
