@@ -8,17 +8,17 @@ namespace frog_problem
         static void Main(string[] args)
         {
             int sims = 1000000;
-            int total_pads = 10;
+            int totalPads = 10;
             Random jumpSize = new Random();
             int[] answers = new int[sims];
 
             for(int i = 0; i < sims; i++)
             {
                 int jumps = 0;
-                int current_pad = 0;
-                while(current_pad < total_pads)
+                int currentPad = 0;
+                while(currentPad < totalPads)
                 {
-                    current_pad = current_pad + jumpSize.Next(1,11 - current_pad);
+                    currentPad = currentPad + jumpSize.Next(1,11 - currentPad);
                     jumps++;
                 }
                 answers[i] = jumps;
