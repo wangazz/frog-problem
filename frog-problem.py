@@ -19,7 +19,7 @@ def simulate(sims):
     return statistics.mean(results)
 
 simulations = 1000
-sim_size = 1000
+sim_size = 10000
 
 calculated_mean = []
 
